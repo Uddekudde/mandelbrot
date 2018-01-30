@@ -18,6 +18,6 @@ public interface MandelbrotServer extends Remote {
     
     Batch getJob() throws RemoteException;
     
-    void sendResult() throws RemoteException;
+    void sendResult(Dataset dataset) throws RemoteException;
         
 }
