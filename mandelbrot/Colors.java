@@ -25,10 +25,8 @@ public class Colors {
                 return new int[]{0, 255, 255 - truncatedY};
             case 3:
                 return new int[]{255, truncatedY, 0};
-            case 4:
-                return new int[]{255, 0, 255 - truncatedY};
             default:
-                return new int[]{1, 2, 3};
+                return new int[]{255, 0, 255 - truncatedY};
         }
     }
 }

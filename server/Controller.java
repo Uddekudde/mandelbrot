@@ -25,17 +25,13 @@ public class Controller extends UnicastRemoteObject implements MandelbrotServer 
 
     @Override
     synchronized public Batch getJob() throws RemoteException {
-        if (handler.hasMoreBatches()) {
             return handler.fetchBatch();
-        } else {
-            return new Batch(0, 0, 0, 0, 0, 0, -1);
-        }
+
     }
 
     @Override
-    public void sendResult(Dataset dataset) throws RemoteException {
+    synchronized public void recieveResult(Dataset dataset) throws RemoteException {
         handler.recieveDataset(dataset);
-        handler.checkBatches();
     }
 
 }

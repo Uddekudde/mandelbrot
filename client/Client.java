@@ -13,7 +13,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import mandelbrot.Colors;
 import mandelbrot.Complex;
 import mandelbrot.Mandelbrot;
@@ -25,7 +24,7 @@ import mandelbrot.Mandelbrot;
 public class Client {
 
     MandelbrotServer server;
-    String host = "127.0.0.1";
+    private final String host = "127.0.0.1";
     boolean running;
     int[] data;
 
@@ -45,9 +44,8 @@ public class Client {
             }
             Batch currentBatch;
             while (running) {
-                System.out.println("getting job");
                 currentBatch = server.getJob();
-                System.out.println(currentBatch.batchNr);
+                System.out.println("batch "+currentBatch.batchNr+ " recieved.");
                 if (currentBatch.batchNr == -1) {
                     running = false;
                     break;
@@ -58,7 +56,7 @@ public class Client {
                 for(int pixel : data){
                 dataList.add(pixel);
                 }
-                server.sendResult(new Dataset(dataList, currentBatch.batchNr));
+                server.recieveResult(new Dataset(dataList, currentBatch.batchNr));
                 
             }
         } catch (Exception e) {
